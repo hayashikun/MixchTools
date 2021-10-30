@@ -1,0 +1,31 @@
+{
+  "name": "Mixch Notification",
+  "description": "Notifying comments on MixChannel.",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "version": "1.0",
+  "permissions": [
+    "notifications",
+    "declarativeContent",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mixch.tv/u/*/live"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html"
+  }
+}
