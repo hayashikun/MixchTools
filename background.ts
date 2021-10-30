@@ -31,6 +31,18 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 chrome.tabs.sendMessage(tabs[0].id!, {message: activate ? "activate" : "deactivate"})
             })
             break
+        case "chat":
+            console.log(message.data);
+            chrome.notifications.create(
+                "mixch_notification",
+                {
+                    type: "basic",
+                    title: "chat",
+                    message: "chat message",
+                    iconUrl: 'img/icon-512.png',
+                    silent: true,
+                });
+            break
     }
 
     sendResponse();
