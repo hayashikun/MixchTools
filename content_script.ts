@@ -1,13 +1,15 @@
+import Chat from "./chat";
+
 const observer = new MutationObserver(function (mutations, observer) {
     mutations.forEach(function (mutation) {
-        mutation.addedNodes.forEach(function (element) {
-            chrome.runtime.sendMessage({type: "chat", data: element})
+        mutation.addedNodes.forEach(function (node) {
+            let chat = Chat.fromLi(node as HTMLLIElement)
+            chrome.runtime.sendMessage({type: "chat", data: chat})
         });
     });
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    console.log(message);
     const chatContent = document.getElementsByClassName("chat-log")[0];
 
     switch (message.message) {

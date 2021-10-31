@@ -1,9 +1,11 @@
+import Chat from "./chat";
+
 chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([{
         conditions: [
             new chrome.declarativeContent.PageStateMatcher({
                 pageUrl: {
-                    // urlMatches: 'mixch.tv\/u\/[0-9]+\/live',
+                    urlMatches: 'mixch.tv\/u\/[0-9]+\/live',
                     schemes: ['https']
                 },
             })
@@ -19,7 +21,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         case "activation":
             const activate = message.activate;
             chrome.notifications.create(
-                "mixch_notification",
                 {
                     type: "basic",
                     title: activate ? "Activated" : "Deactivated",
@@ -32,16 +33,37 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             })
             break
         case "chat":
-            console.log(message.data);
-            chrome.notifications.create(
-                "mixch_notification",
-                {
-                    type: "basic",
-                    title: "chat",
-                    message: "chat message",
-                    iconUrl: 'img/icon-512.png',
-                    silent: true,
-                });
+            const chat: Chat = message.data;
+            let option = {
+                type: "basic",
+                title: "",
+                message: "",
+                iconUrl: 'img/icon-512.png',
+                silent: true,
+            }
+
+            switch (chat.type) {
+                case "normal":
+                    option.title = chat.from;
+                    option.message = chat.body;
+                    break
+                case "super":
+                    option.title = chat.from;
+                    option.message = chat.body;
+                    option.iconUrl = chat.imageUrl;
+                    break;
+                case "stamp":
+                    option.title = chat.from;
+                    option.iconUrl = chat.imageUrl;
+                    break
+                case "item":
+                    option.message = chat.body;
+                    break;
+                case "undefined":
+                    option.title = chat.body;
+                    break;
+            }
+            chrome.notifications.create(option);
             break
     }
 

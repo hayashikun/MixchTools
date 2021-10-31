@@ -9,6 +9,7 @@ const config: Configuration = {
         content_script: path.join(__dirname, 'content_script.ts'),
         background: path.join(__dirname, 'background.ts'),
         popup: path.join(__dirname, 'popup.ts'),
+        chat: path.join(__dirname, 'chat.ts'),
     },
     output: {
         path: dist,
@@ -24,7 +25,7 @@ const config: Configuration = {
         ]
     },
     resolve: {
-        extensions: ['ts', 'js']
+        extensions: ['.ts', '.js']
     },
     plugins: [
         new CopyPlugin({
