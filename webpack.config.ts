@@ -3,13 +3,14 @@ import path from 'path'
 import CopyPlugin from "copy-webpack-plugin";
 
 const dist = path.join(__dirname, 'dist');
+const src =  path.join(__dirname, 'src');
 
 const config: Configuration = {
     entry: {
-        content_script: path.join(__dirname, 'content_script.ts'),
-        background: path.join(__dirname, 'background.ts'),
-        popup: path.join(__dirname, 'popup.ts'),
-        chat: path.join(__dirname, 'chat.ts'),
+        content_script: path.join(src, 'content_script.ts'),
+        background: path.join(src, 'background.ts'),
+        popup: path.join(src, 'popup.ts'),
+        chat: path.join(src, 'chat.ts'),
     },
     output: {
         path: dist,
@@ -31,8 +32,8 @@ const config: Configuration = {
         new CopyPlugin({
             patterns: [
                 {from: 'manifest.json', to: dist},
-                {from: '*.html', to: dist},
-                {from: 'img/*.*', to: dist},
+                {from: '*.html', to: dist, context: src},
+                {from: 'img/*.*', to: dist, context: src},
             ]
         })
     ]
