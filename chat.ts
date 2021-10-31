@@ -1,3 +1,5 @@
+import {DefaultIconUrl} from "./config";
+
 type ChatType = "undefined" | "normal" | "super" | "stamp" | "item";
 
 class Chat {
@@ -8,7 +10,7 @@ class Chat {
 
     constructor(type: ChatType, body: string, image: string | null = null, from: string | null = null) {
         this.type = type;
-        this.imageUrl = image ?? "img/icon-512.png";
+        this.imageUrl = image ?? DefaultIconUrl;
         this.from = from ?? "";
         this.body = body;
     }

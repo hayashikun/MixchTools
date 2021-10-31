@@ -1,4 +1,5 @@
 import Chat from "./chat";
+import {DefaultIconUrl} from "./config";
 
 chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([{
@@ -24,8 +25,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 {
                     type: "basic",
                     title: activate ? "Activated" : "Deactivated",
-                    message: "message",
-                    iconUrl: 'img/icon-512.png',
+                    message: "Push notification activated",
+                    iconUrl: DefaultIconUrl,
                     silent: true,
                 });
             chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
@@ -38,7 +39,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 type: "basic",
                 title: "",
                 message: "",
-                iconUrl: 'img/icon-512.png',
+                iconUrl: DefaultIconUrl,
                 silent: true,
             }
 
