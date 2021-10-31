@@ -1,0 +1,26 @@
+body {
+  --video-width: 100%;
+  --chat-log-height: 800px;
+}
+
+.mt-layout-1 {
+  .inner {
+    flex-direction: column !important;
+
+    .column.left {
+      margin-top: 60px !important;
+      width: 100% !important;
+
+      .live-area {
+        margin-left: calc((100% - var(--video-width)) / 2) !important;
+        width: var(--video-width) !important;
+      }
+    }
+
+    .column.right {
+      margin-top: 10px !important;
+      height: var(--chat-log-height) !important;
+      width: 100% !important;
+    }
+  }
+}

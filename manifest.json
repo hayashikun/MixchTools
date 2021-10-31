@@ -19,6 +19,9 @@
       ],
       "js": [
         "content_script.js"
+      ],
+      "css": [
+        "content_style.css"
       ]
     }
   ],

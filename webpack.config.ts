@@ -2,8 +2,10 @@ import {Configuration} from 'webpack'
 import path from 'path'
 import CopyPlugin from "copy-webpack-plugin";
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const dist = path.join(__dirname, 'dist');
-const src =  path.join(__dirname, 'src');
+const src = path.join(__dirname, 'src');
 
 const config: Configuration = {
     entry: {
@@ -22,6 +24,14 @@ const config: Configuration = {
                 test: /.ts$/,
                 use: 'ts-loader',
                 exclude: '/node_modules/'
+            },
+            {
+                test: /.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader",
+                ]
             }
         ]
     },
@@ -35,7 +45,10 @@ const config: Configuration = {
                 {from: '*.html', to: dist, context: src},
                 {from: 'img/*.*', to: dist, context: src},
             ]
-        })
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'content_style.css',
+        }),
     ]
 }
 
