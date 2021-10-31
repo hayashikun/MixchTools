@@ -1,6 +1,6 @@
 {
-  "name": "Mixch Notification",
-  "description": "Notifying comments on MixChannel.",
+  "name": "Mixch Tools",
+  "description": "Tools for MixChannel.",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "version": "1.0",
