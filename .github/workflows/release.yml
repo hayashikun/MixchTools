@@ -27,8 +27,7 @@ jobs:
         
     - name: Zip
       run: |
-        cd dist
-        zip mixch-tools **.*
+        zip -r mixch-tools dist
         
     - name: Create release
       id: create_release
