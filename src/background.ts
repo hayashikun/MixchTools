@@ -12,10 +12,15 @@ chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
             })
         ],
         actions: [
-            new chrome.declarativeContent.ShowPageAction()
+            new chrome.declarativeContent.ShowPageAction(),
         ]
     }]);
 });
+
+chrome.tabs.onUpdated.addListener(() => {
+    chrome.storage.sync.set({push: false}, () => {
+    });
+})
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     switch (message.type) {
