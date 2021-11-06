@@ -11,7 +11,7 @@ const observer = new MutationObserver(function (mutations, observer) {
 });
 
 const mtLayoutClasses = [
-    "mt-layout-1"
+    "mt-layout-vertical"
 ]
 
 const resetLayout = () => {
@@ -22,24 +22,26 @@ const resetLayout = () => {
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     switch (message.message) {
-        case "activate":
-            observer.observe(document.getElementsByClassName("chat-log")[0], {childList: true, subtree: true});
+        case "push":
+            if (message.activate) {
+                observer.observe(document.getElementsByClassName("chat-log")[0], {childList: true, subtree: true});
+            } else {
+                observer.disconnect();
+            }
             break
-        case "deactivate":
-            observer.disconnect();
+        case "layout":
+            switch (message.layout) {
+                case "reset":
+                    resetLayout()
+                    break
+                case "vertical":
+                    resetLayout()
+                    document.body.classList.add("mt-layout-vertical")
+                    break
+            }
             break
-        case "layout-0":
-            resetLayout()
-            break
-        case "layout-1":
-            resetLayout()
-            document.body.classList.add("mt-layout-1")
-            break
-        case "video-width":
-            document.body.style.setProperty('--video-width', `${message.value}%`);
-            break;
-        case "chat-log-height":
-            document.body.style.setProperty('--chat-log-height', `${message.value}px`);
+        case "variable":
+            document.body.style.setProperty(message.key, message.value);
             break;
     }
 })

@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8"/>
-    <title>Mixch Notification</title>
+    <title>Mixch tools</title>
 </head>
 
 <body style="width: 200px;">
@@ -14,18 +14,21 @@
 <div>
     <div>
         <h1>Layout</h1>
-        <button id="layoutButton-0">Reset Default</button>
+        <button id="resetLayoutButton">Reset</button>
     </div>
 
     <div>
-        <button id="layoutButton-1">Vertical Layout</button>
+        <h2>Vertical layout</h2>
+        <button id="verticalLayoutButton">Set</button>
 
-        <br>
-        <label for="videoWidthInput">Video width (%)</label>
-        <input id="videoWidthInput" type="number" value="100" step="5" width="100px">
+        <div>
+            <label for="videoWidthInput">Video width (%)</label>
+            <input id="videoWidthInput" type="number" value="100" step="5" width="100px">
 
-        <label for="chatLogHeightInput">Video width (px)</label>
-        <input id="chatLogHeightInput" type="number" value="800" step="10" width="100px">
+            <label for="chatLogHeightInput">Chat log height (px)</label>
+            <input id="chatLogHeightInput" type="number" value="800" step="10" width="100px">
+        </div>
+
     </div>
 </div>
 

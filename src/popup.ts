@@ -10,15 +10,16 @@ window.onload = (event) => {
     activateButton.onclick = () => {
         isActive = !isActive;
         updatePopup();
-        chrome.runtime.sendMessage({type: "activation", activate: isActive}, function () {
-        });
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id!, {message: "push", activate: isActive})
+        })
     };
 
-    [0, 1].forEach((i) => {
-        const button = document.getElementById(`layoutButton-${i}`)!
+    ["reset", "vertical"].forEach((i) => {
+        const button = document.getElementById(`${i}LayoutButton`)!
         button.onclick = () => {
             chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-                chrome.tabs.sendMessage(tabs[0].id!, {message: `layout-${i}`})
+                chrome.tabs.sendMessage(tabs[0].id!, {message: "layout", layout: i})
             })
         }
     })
@@ -26,14 +27,18 @@ window.onload = (event) => {
     const videoWidthInput = document.getElementById("videoWidthInput")! as HTMLInputElement;
     videoWidthInput.onchange = (event) => {
         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id!, {message: "video-width", "value": videoWidthInput.value})
+            chrome.tabs.sendMessage(tabs[0].id!,
+                {message: "variable", key: "--video-width", "value": `${videoWidthInput.value}%`}
+            )
         })
     }
 
     const chatLogHeightInput = document.getElementById("chatLogHeightInput")! as HTMLInputElement;
     chatLogHeightInput.onchange = (event) => {
         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id!, {message: "chat-log-height", "value": chatLogHeightInput.value})
+            chrome.tabs.sendMessage(tabs[0].id!,
+                {message: "variable", key: "--chat-log-height", "value": `${chatLogHeightInput.value}px`}
+            )
         })
     }
 
