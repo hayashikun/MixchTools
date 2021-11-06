@@ -1,3 +1,3 @@
-const DefaultIconUrl = "img/icon-256.png"
+const DefaultIconUrl = 'img/icon-256.png'
 
-export {DefaultIconUrl}
+export { DefaultIconUrl }
