@@ -25,9 +25,13 @@ Google Chromeでミクチャの配信ページを開く
 ### Push Notification
 `Activation` ボタンを押すと、コメント等が通知されるようになる
 
+<img src="https://user-images.githubusercontent.com/5352478/140606562-cec24700-1d6f-4d08-a23e-0d28c762e90b.png" width=30% />
+
 ### Layout
 
 #### Vertical layout
 `Set` ボタンを押すと、コメント欄がライブ動画の下に移動する
+
+<img src="https://user-images.githubusercontent.com/5352478/140606578-26b14d6e-55eb-47c7-82f0-791161accdf8.jpg" width=50% />
 
 ライブ動画の幅（%）と、コメント欄の高さは調整できる
